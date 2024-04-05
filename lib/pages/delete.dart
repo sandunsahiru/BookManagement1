@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:bookmanagement/pages/home.dart';
+import 'package:bookmanagement/pages/search.dart';
+import 'package:bookmanagement/pages/delete.dart';
 
 class DeletePage extends StatefulWidget {
   @override
@@ -7,16 +9,6 @@ class DeletePage extends StatefulWidget {
 }
 
 class _DeletePageState extends State<DeletePage> {
-  final _formKey = GlobalKey<FormState>();
-  String _searchId = '';
-  DocumentSnapshot? _searchResult;
-  bool _isLoading = false;
-
-  void _searchById() async {
-    if (_formKey.currentState!.validate()) {
-      setState(() {
-        _isLoading = true;
-      });
 
       try {
         var querySnapshot = await FirebaseFirestore.instance
@@ -121,3 +113,5 @@ class _DeletePageState extends State<DeletePage> {
     );
   }
 }
+
+for this page, add bottom navigation bar as homepage and remove all backend codes. rewrite only UI code. rewrite complete code again.
