@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:bookmanagement/pages/home.dart';
-import 'package:bookmanagement/pages/search.dart';
-import 'package:bookmanagement/pages/delete.dart';
 
 class SearchPage extends StatelessWidget {
+  final Function(int) onItemTapped; // Callback for handling navigation taps
+
+  SearchPage({required this.onItemTapped});
+
   @override
   Widget build(BuildContext context) {
     // Dummy data for the books
@@ -26,12 +27,15 @@ class SearchPage extends StatelessWidget {
     ];
 
     return Scaffold(
+      appBar: AppBar(
+        title: Text('Search Books'),
+      ),
       body: ListView.builder(
         itemCount: books.length,
         itemBuilder: (context, index) {
           return Card(
             margin: EdgeInsets.all(10),
-            color: Color(0xFFF1F8E9), // Light green card background
+            color: Color(0xFFF1F8E9),
             child: ListTile(
               title: Text(books[index]['name'], style: TextStyle(color: Color(0xFF2C7865))),
               subtitle: Column(
@@ -46,6 +50,15 @@ class SearchPage extends StatelessWidget {
             elevation: 5,
           );
         },
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+          BottomNavigationBarItem(icon: Icon(Icons.search), label: 'Search'),
+          BottomNavigationBarItem(icon: Icon(Icons.delete), label: 'Delete'),
+        ],
+        currentIndex: 1, // Assuming 'Search' is the second item
+        onTap: (index) => onItemTapped(index), // Use the provided callback for onTap
       ),
     );
   }
